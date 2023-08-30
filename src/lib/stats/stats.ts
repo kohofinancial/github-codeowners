@@ -23,6 +23,7 @@ export const calcFileStats = (files: File[]): Stats => {
       if(typeof file.lines === 'number') unloved.lines += file.lines;
     } else {
       for (const owner of file.owners) {
+        if (owner === null) continue;
         const counts = ownerCount.get(owner) || { files: 0, lines: 0 };
         counts.files++;
         if(typeof file.lines === 'number') counts.lines += file.lines;
